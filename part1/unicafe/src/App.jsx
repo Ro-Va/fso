@@ -10,6 +10,14 @@ const Display = (props) => (
   <div>{props.name} {props.value}</div>
 )
 
+const Average = (props) => (
+  <div>average {props.average}</div>
+)
+
+const Positive = (props) => (
+  <div>positive {props.positive * 100} %</div>
+)
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -26,6 +34,20 @@ const setValue = (category) =>{
   }
 }
 
+const calcAverage = () => {
+  if (good + bad + neutral === 0) {
+    return 0
+  }
+  return (good*1 - bad*1) / (good + bad + neutral) 
+}
+
+const calcPositive = () => {
+    if (good + bad + neutral === 0) {
+    return 0
+  }
+  return good / (good + neutral + bad)
+}
+
   return (
 
     <div>
@@ -37,6 +59,9 @@ const setValue = (category) =>{
       <Display value={good} name="good"/>
       <Display value={neutral} name="neutral"/>
       <Display value={bad} name="bad"/>
+      <div>all {good + neutral + bad}</div>
+      <Average average={calcAverage()}/>
+      <Positive positive={calcPositive()}/>
     </div>
   )
 }

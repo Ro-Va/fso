@@ -18,6 +18,13 @@ const Positive = (props) => (
   <div>positive {props.positive * 100} %</div>
 )
 
+const Statistics = (props) => (
+  <div>
+    <Average average={props.average}/>
+    <Positive positive={props.positive}/>
+  </div>
+)
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -60,8 +67,7 @@ const calcPositive = () => {
       <Display value={neutral} name="neutral"/>
       <Display value={bad} name="bad"/>
       <div>all {good + neutral + bad}</div>
-      <Average average={calcAverage()}/>
-      <Positive positive={calcPositive()}/>
+      <Statistics average={calcAverage()} positive={calcPositive()}/>
     </div>
   )
 }
